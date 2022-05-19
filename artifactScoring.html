@@ -17,12 +17,50 @@
 <body>
     <div id="app">
         <header-navbar></header-navbar>
-        <div class="title">
-
+        <div class="container">
+            <div class="title">
+                <span class="display-3"><strong>聖遺物評分工具</strong></span>
+            </div>
+            <div class="row main">
+                <div class="col inputs">
+                    <div class="row">
+                        <span class="h3">聖遺物選擇</span>
+                        <div class="col-3 inputs-star">
+                            <select class="col form-select form-select-lg" aria-label="Artifact Star">
+                                <option selected>星級</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="col-9 inputs-name">
+                            <select class="col form-select form-select-lg inputs-name" aria-label="Artifact Name">
+                                <option selected>名稱</option>
+                                <option value="1">幸運兒</option>
+                                <option value="2">遊醫</option>
+                                <option value="3">冒險家</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="inputs-level">
+                        <label for="level" class="form-label"><span class="h3">強化等級</span></label>
+                        <input type="number" class="form-control form-control-lg" id="level" placeholder="0~20">
+                    </div>
+                    <div class="inputs-mainAtt">
+                        <label for="mainAtt" class="form-label"><span class="h3">主辭條</span></label>
+                        <input type="number" class="form-control form-control-lg" id="mainAtt" placeholder="0~20">
+                    </div>
+                    <div class="inputs-secondaryAtt1">
+                        <label for="secondaryAtt1" class="form-label"><span class="h3">副辭條1</span></label>
+                        <input type="number" class="form-control form-control-lg" id="secondaryAtt1" placeholder="0~20">
+                    </div>
+                </div>
+                <div class="col output"></div>
+            </div>
         </div>
-        <div class="main">
 
-        </div>
         <footer-custom></footer-custom>
     </div>
     <script src="js/public.js"></script>
