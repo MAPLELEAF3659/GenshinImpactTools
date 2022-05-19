@@ -8,6 +8,7 @@
     <title>原神工具箱</title>
 
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="css/public.css">
     <link rel="stylesheet" href="css/index.css">
 
     <script src="https://unpkg.com/vue@3"></script>
@@ -15,47 +16,30 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div id="app">
+        <header-navbar></header-navbar>
         <div class="container">
-            <a href="index.html" class="navbar-brand"><b>原神工具箱</b></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">主頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">聖遺物評分工具</a>
-                    </li>
-                </ul>
+            <div class="row main">
+                <div class="col">
+                    <div class="title"><span class="display-1">原神工具箱<span></div>
+                    <div class="subtitle"><span class="h3">Made by MAPLELEAF3659</span></div>
+                </div>
             </div>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="row main">
-            <div class="col">
-                <div class="title"><span class="display-1">原神工具箱<span></div>
-                <div class="subtitle"><span class="h3">Made by MAPLELEAF3659</span></div>
-            </div>
-        </div>
-        <div class="row toolsCards">
-            <div class="col-4 card text-center">
-                <img class="card-img-top" src="img/artifact_gameScreen.png" alt="artifact_gameScreen">
-                <div class="card-body">
-                    <div class="card-title"><span class="display-5">聖遺物評分工具</span></div>
-                    <div class="card-text"><span class="h5">輸入聖遺物資料後，為您計算出聖遺物評價</span></div>
-                    <a href="artifactScoring.html" class="btn btn-primary">按我前往</a>
+            <div class="row toolsCards">
+                <div class="col-4 card text-center">
+                    <img class="card-img-top" src="img/artifact_gameScreen.png" alt="artifact_gameScreen">
+                    <div class="card-body">
+                        <div class="card-title"><span class="display-5">聖遺物評分工具</span></div>
+                        <div class="card-text"><span class="h5">輸入聖遺物資料後，為您計算出聖遺物評價</span></div>
+                        <a href="artifactScoring.html" class="btn btn-primary">按我前往</a>
+                    </div>
                 </div>
             </div>
         </div>
+        <footer-custom></footer-custom>
     </div>
-    <footer class="footer">
-        <h6 class="title">原神工具箱 &copy2022 MAPLELEAF3659</h6>
-    </footer>
-
     <script src="js/index.js"></script>
+    <script src="js/public.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 
