@@ -1,6 +1,6 @@
-const app = Vue.createApp({});
+const header = Vue.createApp({});
 
-app.component('header-navbar', {
+header.component('header-navbar', {
     template: `
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
@@ -11,10 +11,10 @@ app.component('header-navbar', {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">主頁</a>
+                    <a class="nav-link" href="index.html">主頁</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">聖遺物評分工具</a>
+                    <a class="nav-link" href="artifactScoring.html">聖遺物評分工具</a>
                 </li>
             </ul>
         </div>
@@ -22,11 +22,15 @@ app.component('header-navbar', {
 </nav>`
 });
 
-app.component('footer-custom', {
+header.mount("#header");
+
+const footer = Vue.createApp({});
+
+footer.component('footer-custom', {
     template: `
 <footer class="footer">
     <h6 class="title">原神工具箱 &copy2022 MAPLELEAF3659</h6>
 </footer>`
 });
 
-app.mount('#app');
+footer.mount('#footer');

@@ -15,171 +15,121 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="header">
         <header-navbar></header-navbar>
-        <div class="container">
-            <div class="title">
-                <span class="display-3"><strong>聖遺物評分工具</strong></span>
-            </div>
-            <div class="row main">
-                <div class="col inputs">
-                    <div class="row">
-                        <span class="col-12 h3">聖遺物選擇</span>
-                        <div class="col-6">
-                            <div class="form-floating">
-                                <select class="form-select inputs-name" aria-label="Artifact Name" id="name">
-                                <option selected>請選擇</option>
-                                <option value="1">幸運兒</option>
-                                <option value="2">遊醫</option>
-                                <option value="3">冒險家</option>
+    </div>
+    <div class="container">
+        <div class="title">
+            <span class="display-3"><strong>聖遺物評分工具</strong></span>
+        </div>
+        <div class="row main" id="main">
+            <div class="col-8 inputs">
+                <div class="row">
+                    <span class="col-12 h3">聖遺物選擇</span>
+                    <div class="col-6">
+                        <div class="form-floating">
+                            <select class="form-select inputs-name" v-model="typeSelected" aria-label="Artifact Name" id="name">
+                                <option selected disabled>請選擇</option>
+                                <option v-for="type in typeArr">{{type}}</option>
                             </select>
-                                <label for="name">名稱</label>
-                            </div>
-
+                            <label for="name">名稱</label>
                         </div>
-                        <div class="col-3">
-                            <div class="form-floating">
-                                <select class="form-select inputs-star" aria-label="Artifact Star" id="star">
-                                <option selected>0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+
+                    </div>
+                    <div class="col-3">
+                        <div class="form-floating">
+                            <select class="form-select inputs-star" aria-label="Artifact Star" id="star">
+                                <option selected disabled>0</option>
+                                <option value="1" :disabled="isStar1">1</option>
+                                <option value="2" :disabled="isStar2">2</option>
+                                <option value="3" :disabled="isStar3">3</option>
+                                <option value="4" :disabled="isStar4">4</option>
+                                <option value="5" :disabled="isStar5">5</option>
                             </select>
-                                <label for="star">星級</label>
-                            </div>
+                            <label for="star">星級</label>
+                        </div>
 
-                        </div>
-                        <div class="col-3">
-                            <div class="form-floating">
-                                <input type="number" class="form-control inputs-level" id="level" placeholder="0~20">
-                                <label for="level">強化等級</label>
-                            </div>
-                        </div>
                     </div>
-
-                    <div class="row inputs-mainAtt">
-                        <span class="col-12 h3">主詞條</span>
-                        <div class="col-6">
-                            <select class="form-select form-select-lg mainAtt-type" aria-label="Artifact Main Att Type" id="mainAttType">
-                                    <option selected>選擇詞條類型</option>
-                                    <option value="1">攻擊力</option>
-                                    <option value="2">攻擊力百分比</option>
-                                    <option value="3">防禦力</option>
-                                    <option value="4">防禦力百分比</option>
-                                    <option value="5">生命值</option>
-                                    <option value="6">生命值百分比</option>
-                                    <option value="7">爆擊率</option>
-                                    <option value="8">爆擊傷害</option>
-                                    <option value="9">元素充能效率</option>
-                                    <option value="10">元素精通</option>
-                                    <option value="11">治療加成</option>
-                                    <option value="12">物理傷害加成</option>
-                                    <option value="13">火元素傷害加成</option>
-                                    <option value="14">雷元素傷害加成</option>
-                                    <option value="15">冰元素傷害加成</option>
-                                    <option value="16">水元素傷害加成</option>
-                                    <option value="17">風元素傷害加成</option>
-                                    <option value="18">岩元素傷害加成</option>
-                                </select>
-                        </div>
-                        <div class="col-6">
-                            <input type="number" class="form-control form-control-lg mainAtt-Num" id="mainAttNum" placeholder="請輸入數字">
-                        </div>
-                    </div>
-                    <div class="row inputs-secondaryAtt">
-                        <span class="col-12 h3">副詞條1</span>
-                        <div class="col-6">
-                            <select class="form-select form-select-lg secondaryAtt-type" aria-label="Artifact Secondary Att Type" id="secondaryAttType1">
-                                    <option selected>選擇詞條類型</option>
-                                    <option value="1">攻擊力</option>
-                                    <option value="2">攻擊力百分比</option>
-                                    <option value="3">防禦力</option>
-                                    <option value="4">防禦力百分比</option>
-                                    <option value="5">生命值</option>
-                                    <option value="6">生命值百分比</option>
-                                    <option value="7">爆擊率</option>
-                                    <option value="8">爆擊傷害</option>
-                                    <option value="9">元素充能效率</option>
-                                    <option value="10">元素精通</option>
-                                </select>
-                        </div>
-                        <div class="col-6">
-                            <input type="number" class="form-control form-control-lg secondaryAtt-Num" id="secondaryAttNum1" placeholder="請輸入數字">
-                        </div>
-                    </div>
-                    <div class="row inputs-secondaryAtt">
-                        <span class="col-12 h3">副詞條2</span>
-                        <div class="col-6">
-                            <select class="form-select form-select-lg secondaryAtt-type" aria-label="Artifact Secondary Att Type" id="secondaryAttType2">
-                                    <option selected>選擇詞條類型</option>
-                                    <option value="1">攻擊力</option>
-                                    <option value="2">攻擊力百分比</option>
-                                    <option value="3">防禦力</option>
-                                    <option value="4">防禦力百分比</option>
-                                    <option value="5">生命值</option>
-                                    <option value="6">生命值百分比</option>
-                                    <option value="7">爆擊率</option>
-                                    <option value="8">爆擊傷害</option>
-                                    <option value="9">元素充能效率</option>
-                                    <option value="10">元素精通</option>
-                                </select>
-                        </div>
-                        <div class="col-6">
-                            <input type="number" class="form-control form-control-lg secondaryAtt-Num" id="secondaryAttNum2" placeholder="請輸入數字">
-                        </div>
-                    </div>
-                    <div class="row inputs-secondaryAtt">
-                        <span class="col-12 h3">副詞條3</span>
-                        <div class="col-6">
-                            <select class="form-select form-select-lg secondaryAtt-type" aria-label="Artifact Secondary Att Type" id="secondaryAttType3">
-                                    <option selected>選擇詞條類型</option>
-                                    <option value="1">攻擊力</option>
-                                    <option value="2">攻擊力百分比</option>
-                                    <option value="3">防禦力</option>
-                                    <option value="4">防禦力百分比</option>
-                                    <option value="5">生命值</option>
-                                    <option value="6">生命值百分比</option>
-                                    <option value="7">爆擊率</option>
-                                    <option value="8">爆擊傷害</option>
-                                    <option value="9">元素充能效率</option>
-                                    <option value="10">元素精通</option>
-                                </select>
-                        </div>
-                        <div class="col-6">
-                            <input type="number" class="form-control form-control-lg secondaryAtt-Num" id="secondaryAttNum3" placeholder="請輸入數字">
-                        </div>
-                    </div>
-                    <div class="row inputs-secondaryAtt">
-                        <span class="col-12 h3">副詞條4</span>
-                        <div class="col-6">
-                            <select class="form-select form-select-lg secondaryAtt-type" aria-label="Artifact Secondary Att Type" id="secondaryAttType4">
-                                    <option selected>選擇詞條類型</option>
-                                    <option value="1">攻擊力</option>
-                                    <option value="2">攻擊力百分比</option>
-                                    <option value="3">防禦力</option>
-                                    <option value="4">防禦力百分比</option>
-                                    <option value="5">生命值</option>
-                                    <option value="6">生命值百分比</option>
-                                    <option value="7">爆擊率</option>
-                                    <option value="8">爆擊傷害</option>
-                                    <option value="9">元素充能效率</option>
-                                    <option value="10">元素精通</option>
-                                </select>
-                        </div>
-                        <div class="col-6">
-                            <input type="number" class="form-control form-control-lg secondaryAtt-Num" id="secondaryAttNum4" placeholder="請輸入數字">
+                    <div class="col-3 ">
+                        <div class="form-floating ">
+                            <input type="number" class="form-control inputs-level" id="level" placeholder="0~20">
+                            <label for="level">強化等級</label>
                         </div>
                     </div>
                 </div>
-                <div class="col output"></div>
+
+                <div class="row inputs-mainAtt">
+                    <span class="col-12 h3">主詞條</span>
+                    <div class="col-6">
+                        <select class="form-select form-select-lg mainAtt-type" aria-label="Artifact Main Att Type" id="mainAttType">
+                            <option selected disabled>選擇詞條類型</option>
+                            <option v-for="att in attType">{{att}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control form-control-lg mainAtt-Num" id="mainAttNum" placeholder="請輸入數字">
+                    </div>
+                </div>
+                <div class="row inputs-secondaryAtt">
+                    <span class="col-12 h3">副詞條1</span>
+                    <div class="col-6">
+                        <select class="form-select form-select-lg secondaryAtt-type" aria-label="Artifact Secondary Att Type" id="secondaryAttType1">
+                            <option selected disabled>選擇詞條類型</option>
+                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 ">
+                        <input type="number " class="form-control form-control-lg secondaryAtt-Num " id="secondaryAttNum1 " placeholder="請輸入數字 ">
+                    </div>
+                </div>
+                <div class="row inputs-secondaryAtt ">
+                    <span class="col-12 h3 ">副詞條2</span>
+                    <div class="col-6 ">
+                        <select class="form-select form-select-lg secondaryAtt-type " aria-label="Artifact Secondary Att Type " id="secondaryAttType2 ">
+                            <option selected disabled>選擇詞條類型</option>
+                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 ">
+                        <input type="number " class="form-control form-control-lg secondaryAtt-Num " id="secondaryAttNum2 " placeholder="請輸入數字 ">
+                    </div>
+                </div>
+                <div class="row inputs-secondaryAtt ">
+                    <span class="col-12 h3 ">副詞條3</span>
+                    <div class="col-6 ">
+                        <select class="form-select form-select-lg secondaryAtt-type " aria-label="Artifact Secondary Att Type " id="secondaryAttType3 ">
+                            <option selected disabled>選擇詞條類型</option>
+                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6 ">
+                        <input type="number " class="form-control form-control-lg secondaryAtt-Num " id="secondaryAttNum3 " placeholder="請輸入數字 ">
+                    </div>
+                </div>
+                <div class="row inputs-secondaryAtt ">
+                    <span class="col-12 h3 ">副詞條4</span>
+                    <div class="col-6 ">
+                        <select class="form-select form-select-lg secondaryAtt-type " aria-label="Artifact Secondary Att Type " id="secondaryAttType4 ">
+                            <option selected disabled>選擇詞條類型</option>
+                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control form-control-lg secondaryAtt-Num" id="secondaryAttNum4 " placeholder="請輸入數字 ">
+                    </div>
+                </div>
+            </div>
+            <div class="col output">
+                <div class="h1">評分</div>
+                <div class="display-1">S</div>
             </div>
         </div>
-
+    </div>
+    <div id="footer">
         <footer-custom></footer-custom>
     </div>
     <script src="js/public.js"></script>
+    <script src="js/artifactScoring.js"></script>
 </body>
 
 </html>
