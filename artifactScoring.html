@@ -28,9 +28,9 @@
                     <span class="col-12 h3">聖遺物選擇</span>
                     <div class="col-6">
                         <div class="form-floating">
-                            <select class="form-select inputs-name" v-model="typeSelected" aria-label="Artifact Name" id="name">
-                                <option selected disabled>請選擇</option>
-                                <option v-for="type in typeArr">{{type}}</option>
+                            <select class="form-select inputs-name" v-model="typeSelectedIndex" aria-label="Artifact Name" id="name">
+                                <option selected>請選擇</option>
+                                <option v-for="(type,index) in typeArr" :value="index">{{type}}</option>
                             </select>
                             <label for="name">名稱</label>
                         </div>
@@ -40,11 +40,11 @@
                         <div class="form-floating">
                             <select class="form-select inputs-star" aria-label="Artifact Star" id="star">
                                 <option selected disabled>0</option>
-                                <option value="1" :disabled="isStar1">1</option>
-                                <option value="2" :disabled="isStar2">2</option>
-                                <option value="3" :disabled="isStar3">3</option>
-                                <option value="4" :disabled="isStar4">4</option>
-                                <option value="5" :disabled="isStar5">5</option>
+                                <option value="1" :disabled="!isStar1">1</option>
+                                <option value="2" :disabled="!isStar2">2</option>
+                                <option value="3" :disabled="!isStar3">3</option>
+                                <option value="4" :disabled="!isStar4">4</option>
+                                <option value="5" :disabled="!isStar5">5</option>
                             </select>
                             <label for="star">星級</label>
                         </div>

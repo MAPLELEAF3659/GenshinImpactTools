@@ -1,7 +1,7 @@
 Vue.createApp({
     data() {
         return {
-            typeSelected: 0,
+            typeSelectedIndex: 0,
             isStar1: false,
             isStar2: false,
             isStar3: false,
@@ -47,7 +47,31 @@ Vue.createApp({
                 '千岩牢固',
                 '被憐愛的少女',
             ],
-            attType: ["攻擊力", "攻擊力百分比", "防禦力", "防禦力百分比", "生命值", "生命值百分比", "爆擊率", "爆擊傷害", "元素充能效率", "元素精通", "治療加成", "物理傷害加成", "火元素傷害加成", "雷元素傷害加成", "冰元素傷害加成", "水元素傷害加成", "風元素傷害加成", "岩元素傷害加成"]
+            attType: ["攻擊力", "攻擊力百分比", "防禦力", "防禦力百分比", "生命值", "生命值百分比", "爆擊率", "爆擊傷害", "元素充能效率", "元素精通", "治療加成", "物理傷害加成", "火元素傷害加成", "雷元素傷害加成", "冰元素傷害加成", "水元素傷害加成", "風元素傷害加成", "岩元素傷害加成"],
+
+        }
+    },
+    watch: {
+        typeSelectedIndex(val) {
+            if (val < 3) {
+                this.isStar1 = true;
+                this.isStar2 = true;
+                this.isStar3 = true;
+                this.isStar4 = false;
+                this.isStar5 = false;
+            } else if (val >= 3 && val < 16) {
+                this.isStar1 = false;
+                this.isStar2 = false;
+                this.isStar3 = true;
+                this.isStar4 = true;
+                this.isStar5 = false;
+            } else {
+                this.isStar1 = false;
+                this.isStar2 = false;
+                this.isStar3 = false;
+                this.isStar4 = true;
+                this.isStar5 = true;
+            }
         }
     },
 }).mount("#main");
