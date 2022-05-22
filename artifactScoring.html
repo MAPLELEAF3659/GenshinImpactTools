@@ -23,20 +23,28 @@
             <span class="display-3"><strong>聖遺物評分工具</strong></span>
         </div>
         <div class="row main" id="main">
-            <div class="col-8 inputs">
+            <div class="col-12 col-md-8 inputs">
                 <div class="row">
                     <span class="col-12 h3">聖遺物選擇</span>
-                    <div class="col-6">
+                    <div class="col-12 col-md-3">
                         <div class="form-floating">
-                            <select class="form-select inputs-name" v-model="typeSelectedIndex" aria-label="Artifact Name" id="name">
-                                <option selected>請選擇</option>
-                                <option v-for="(type,index) in typeArr" :value="index">{{type}}</option>
+                            <select class="form-select inputs-name" v-model="nameSelectedIndex" aria-label="Artifact Name" id="name">
+                                <option selected value="-1" disabled>請選擇</option>
+                                <option v-for="(name,index) in nameArr" :value="index">{{name}}</option>
                             </select>
                             <label for="name">名稱</label>
                         </div>
-
                     </div>
-                    <div class="col-3">
+                    <div class="col-12 col-md-3">
+                        <div class="form-floating">
+                            <select class="form-select inputs-type" v-model="typeSelectedIndex" aria-label="Artifact Type" id="type">
+                                <option selected value="-1" disabled>請選擇</option>
+                                <option v-for="(type,index) in typeArr" :value="index">{{type}}</option>
+                            </select>
+                            <label for="type">類型</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
                         <div class="form-floating">
                             <select class="form-select inputs-star" aria-label="Artifact Star" id="star">
                                 <option selected disabled>0</option>
@@ -50,9 +58,12 @@
                         </div>
 
                     </div>
-                    <div class="col-3 ">
+                    <div class="col-12 col-md-3">
                         <div class="form-floating ">
-                            <input type="number" class="form-control inputs-level" id="level" placeholder="0~20">
+                            <select class="form-select inputs-level" v-model="level" aria-label="Artifact Level" id="level">
+                                <option selected value="-1" disabled>請選擇</option>
+                                <option v-for="(level,index) in 21" :value="index">+{{level-1}}</option>
+                            </select>
                             <label for="level">強化等級</label>
                         </div>
                     </div>
@@ -61,67 +72,67 @@
                 <div class="row inputs-mainAtt">
                     <span class="col-12 h3">主詞條</span>
                     <div class="col-6">
-                        <select class="form-select form-select-lg mainAtt-type" aria-label="Artifact Main Att Type" id="mainAttType">
+                        <select class="form-select form-select-lg mainAtt-type" v-model="attInputsName[0]" aria-label="Artifact Main Att Type" id="mainAttType">
                             <option selected disabled>選擇詞條類型</option>
-                            <option v-for="att in attType">{{att}}</option>
+                            <option v-for="att in mainAtt(typeSelectedIndex)">{{att}}</option>
                         </select>
                     </div>
                     <div class="col-6">
-                        <input type="number" class="form-control form-control-lg mainAtt-Num" id="mainAttNum" placeholder="請輸入數字">
+                        <input type="number" class="form-control form-control-lg mainAtt-Num" v-model="attInputs[0]" id="mainAttNum" placeholder="請輸入數字">
                     </div>
                 </div>
                 <div class="row inputs-secondaryAtt">
                     <span class="col-12 h3">副詞條1</span>
                     <div class="col-6">
-                        <select class="form-select form-select-lg secondaryAtt-type" aria-label="Artifact Secondary Att Type" id="secondaryAttType1">
+                        <select class="form-select form-select-lg secondaryAtt-type" v-model="attInputsName[1]" aria-label="Artifact Secondary Att Type" id="secondaryAttType1">
                             <option selected disabled>選擇詞條類型</option>
-                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
+                            <option v-for="att in attTypeArr.slice(0,10)">{{att}}</option>
                         </select>
                     </div>
-                    <div class="col-6 ">
-                        <input type="number " class="form-control form-control-lg secondaryAtt-Num " id="secondaryAttNum1 " placeholder="請輸入數字 ">
+                    <div class="col-6">
+                        <input type="number" class="form-control form-control-lg secondaryAtt-Num" v-model="attInputs[1]" id="secondaryAttNum1" placeholder="請輸入數字">
                     </div>
                 </div>
                 <div class="row inputs-secondaryAtt ">
                     <span class="col-12 h3 ">副詞條2</span>
-                    <div class="col-6 ">
-                        <select class="form-select form-select-lg secondaryAtt-type " aria-label="Artifact Secondary Att Type " id="secondaryAttType2 ">
+                    <div class="col-6">
+                        <select class="form-select form-select-lg secondaryAtt-type" v-model="attInputsName[2]" aria-label="Artifact Secondary Att Type" id="secondaryAttType2">
                             <option selected disabled>選擇詞條類型</option>
-                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
-                        </select>
-                    </div>
-                    <div class="col-6 ">
-                        <input type="number " class="form-control form-control-lg secondaryAtt-Num " id="secondaryAttNum2 " placeholder="請輸入數字 ">
-                    </div>
-                </div>
-                <div class="row inputs-secondaryAtt ">
-                    <span class="col-12 h3 ">副詞條3</span>
-                    <div class="col-6 ">
-                        <select class="form-select form-select-lg secondaryAtt-type " aria-label="Artifact Secondary Att Type " id="secondaryAttType3 ">
-                            <option selected disabled>選擇詞條類型</option>
-                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
-                        </select>
-                    </div>
-                    <div class="col-6 ">
-                        <input type="number " class="form-control form-control-lg secondaryAtt-Num " id="secondaryAttNum3 " placeholder="請輸入數字 ">
-                    </div>
-                </div>
-                <div class="row inputs-secondaryAtt ">
-                    <span class="col-12 h3 ">副詞條4</span>
-                    <div class="col-6 ">
-                        <select class="form-select form-select-lg secondaryAtt-type " aria-label="Artifact Secondary Att Type " id="secondaryAttType4 ">
-                            <option selected disabled>選擇詞條類型</option>
-                            <option v-for="att in attType.slice(0,10)">{{att}}</option>
+                            <option v-for="att in attTypeArr.slice(0,10)">{{att}}</option>
                         </select>
                     </div>
                     <div class="col-6">
-                        <input type="number" class="form-control form-control-lg secondaryAtt-Num" id="secondaryAttNum4 " placeholder="請輸入數字 ">
+                        <input type="number" class="form-control form-control-lg secondaryAtt-Num" v-model="attInputs[2]" id="secondaryAttNum2" placeholder="請輸入數字">
+                    </div>
+                </div>
+                <div class="row inputs-secondaryAtt">
+                    <span class="col-12 h3">副詞條3</span>
+                    <div class="col-6">
+                        <select class="form-select form-select-lg secondaryAtt-type" v-model="attInputsName[3]" aria-label="Artifact Secondary Att Type" id="secondaryAttType3">
+                            <option selected disabled>選擇詞條類型</option>
+                            <option v-for="att in attTypeArr.slice(0,10)">{{att}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control form-control-lg secondaryAtt-Num" v-model="attInputs[3]" id="secondaryAttNum3" placeholder="請輸入數字">
+                    </div>
+                </div>
+                <div class="row inputs-secondaryAtt">
+                    <span class="col-12 h3">副詞條4</span>
+                    <div class="col-6">
+                        <select class="form-select form-select-lg secondaryAtt-type" v-model="attInputsName[4]" aria-label="Artifact Secondary Att Type" id="secondaryAttType4">
+                            <option selected disabled>選擇詞條類型</option>
+                            <option v-for="att in attTypeArr.slice(0,10)">{{att}}</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" class="form-control form-control-lg secondaryAtt-Num" v-model="attInputs[4]" id="secondaryAttNum4" placeholder="請輸入數字">
                     </div>
                 </div>
             </div>
-            <div class="col output">
-                <div class="h1">評分</div>
-                <div class="display-1">S</div>
+            <div class="col-12 col-md-4 align-self-center outputs">
+                <div class="h1 text-center">評分</div>
+                <div class="display-1 text-center"><strong>{{calculateScore()}}</strong></div>
             </div>
         </div>
     </div>
